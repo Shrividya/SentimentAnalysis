@@ -27,7 +27,9 @@ else:
     data = pd.read_csv("data/sample_stock.csv")
     data.columns = data.columns.str.strip()  # Remove any spaces
     print(data.columns)
-    data = pd.read_csv("data/sample_stock.csv", parse_dates=["Date"], index_col="Date")
+    data = pd.read_csv(
+        "data/sample_stock.csv", parse_dates=["Date"], index_col="Date"
+    )
 st.line_chart(data["Close"])
 st.subheader("Latest News Sentiment")
 sentiment_results = []
