@@ -6,3 +6,5 @@ requests
 textblob
 streamlit
 black
+nltk
+
