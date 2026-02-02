@@ -32,4 +32,4 @@ jobs:
           flake8 src/ --max-line-length=120
       - name: Run Streamlit App Check
         run: |
-          streamlit hello
+          streamlit --version
