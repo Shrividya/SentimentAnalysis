@@ -25,7 +25,7 @@ jobs:
           pip install -r requirements.txt
       - name: Run black
         run:
-          black . --line-length=78
+          black . --check --line-length=78
       - name: Lint with flake8
         run: |
           pip install flake8

@@ -1,7 +1,14 @@
 import nltk
 from textblob import TextBlob
 from nltk.sentiment import SentimentIntensityAnalyzer
-nltk.download('vader_lexicon')
+
+try:
+    nltk.data.find("sentiment/vader_lexicon.zip")
+except LookupError:
+    nltk.download("vader_lexicon", quiet=True)
+
+_vader = SentimentIntensityAnalyzer()
+
 
 def analyze_sentiment_tb(text):
     polarity = TextBlob(text).sentiment.polarity
@@ -14,8 +21,7 @@ def analyze_sentiment_tb(text):
 
 
 def analyze_sentiment_vader(text):
-    vader_sentiment = SentimentIntensityAnalyzer()
-    polarity = vader_sentiment.polarity_scores(text)
+    polarity = _vader.polarity_scores(text)
 
     if polarity["compound"] >= 0.05:
         return "positive"
@@ -28,8 +34,7 @@ def analyze_sentiment_vader(text):
 def analyze_sentiment(text):
     tb_result = analyze_sentiment_tb(text)
 
-    vader = SentimentIntensityAnalyzer()
-    vader_scores = vader.polarity_scores(text)
+    vader_scores = _vader.polarity_scores(text)
     vader_result = analyze_sentiment_vader(text)
 
     # If both methods agree, return that sentiment
